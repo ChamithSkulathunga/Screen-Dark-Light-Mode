@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dark-Light-Switch</title>
-    
-    
 
     <style>
         body{
@@ -26,9 +24,10 @@
         .switch{
             position: relative;
             display: inline-block;
-            width: 60px;
-            height: 34px;
+            width: 300px;
+            height: 150px;
             /* outline: 1px solid red; */
+            cursor: pointer;
         }
 
         .switch input{
@@ -44,51 +43,101 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
+            background-color: #cbc3c3;
+            border-radius: 40px;
+            /* border: 1px solid #434343; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .slider::before{
             position: absolute;
             content: '';
             background-color: white;
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            transition: 0.4s;
+            height: 125px;
+            width: 175px;
+            left: 33px;
+            bottom: 12px;
+            transition: 0.7s;
+            border-radius: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        #myImg img,
+        #myImg2 img {
+            width: 100px; 
+            height: 100px; 
+            object-fit: contain;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            left: -30px;
+            bottom: 0px;
+           
+        }
+
+        #myImg2 img{
+            left: 25px;
+            bottom: 0px;  
         }
 
         input:checked + .slider::before{
             background-color: rgb(0, 0, 0);
-            transform: translateX(26px);
+            transform: translateX(56px);
+            
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Light / Dark Mode Toggle</h1>
+        <h1>Light - Dark Mode </h1>
+        <br>
         <label class="switch">
             <input type="checkbox" name="" id="modetoggle"/>
-            <span class="slider"></span>
+            <span class="slider">
+                <div id="myImg"><img src="sun.png" alt="Sun"></div>
+                <div id="myImg2"><img src="moon.png" alt="Moon"></div>
+            </span>
         </label> 
+
+        
     </div>
     
     <script>
         const modetoggle = document.getElementById('modetoggle');
-
-        modetoggle.addEventListener('change',function(){
+        const sunImage = document.getElementById('myImg');
+        const moonImage = document.getElementById('myImg2');
+    
+        // Function to update images and styles based on mode
+        function updateMode() {
             if (modetoggle.checked) {
-               
-                document.documentElement.style.setProperty('--bg-color','#333');
-                document.documentElement.style.setProperty('--text-color','#fff');
-                // console.log('checked');
-            }else{
-                document.documentElement.style.setProperty('--bg-color','#fff');
-                document.documentElement.style.setProperty('--text-color','#333');
-                // console.log('not checked');
-
+                // Dark mode
+                document.documentElement.style.setProperty('--bg-color', '#333');
+                document.documentElement.style.setProperty('--text-color', '#fff');
+                sunImage.style.display = 'none';
+                moonImage.style.display = 'block';
+            } else {
+                // Light mode
+                document.documentElement.style.setProperty('--bg-color', '#fff');
+                document.documentElement.style.setProperty('--text-color', '#333');
+                sunImage.style.display = 'block';
+                moonImage.style.display = 'none';
             }
+        }
+    
+        // Initial setup based on default mode
+        updateMode();
+    
+        modetoggle.addEventListener('change', function () {
+            // Update mode on toggle change
+            updateMode();
         });
     </script>
 

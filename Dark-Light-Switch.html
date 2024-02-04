@@ -74,5 +74,23 @@
         </label> 
     </div>
     
+    <script>
+        const modetoggle = document.getElementById('modetoggle');
+
+        modetoggle.addEventListener('change',function(){
+            if (modetoggle.checked) {
+               
+                document.documentElement.style.setProperty('--bg-color','#333');
+                document.documentElement.style.setProperty('--text-color','#fff');
+                // console.log('checked');
+            }else{
+                document.documentElement.style.setProperty('--bg-color','#fff');
+                document.documentElement.style.setProperty('--text-color','#333');
+                // console.log('not checked');
+
+            }
+        });
+    </script>
+
 </body>
 </html>
